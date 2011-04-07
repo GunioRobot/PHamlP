@@ -4,10 +4,10 @@ namespace PHamlP;
 
 use Comodo\Application,
     ActiveSupport\Configuration,
-    ActionPack\ActionView\Extensions\Base,
+    ActionPack\ActionView\View,
     HamlParser;
 
-class Haml extends Base {
+class HamlView extends View {
     /**
      * Parses the given template file.
      *
@@ -15,8 +15,6 @@ class Haml extends Base {
      * @return string       The file's content.
      */
     public function compile($file, array $localAssigns) {
-        parent::compile($file, $localAssigns);
-
         // load local variables
         foreach ($localAssigns as $variable => $value) {
             $$variable = $value;
@@ -27,8 +25,8 @@ class Haml extends Base {
         $configuration = array_shift($configuration);
 
         // get the template content
-        $parser = new HamlParser($configuration);;
-        $path = $parser->parse($file, Application::$ROOT . 'tmp/haml');
+        $parser = new HamlParser($configuration);
+        $path = $parser->parse($file, Application::$ROOT . 'tmp/haml/' . md5(dirname($file)));
 
         // get the template content
         ob_start();

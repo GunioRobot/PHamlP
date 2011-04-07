@@ -12,7 +12,7 @@ ActiveSupport\Configuration::set('Haml', function($config) {
      * This allows Haml to be used for non-(X)HTML documents that are XML
      * compliant.
      */
-    $config->doctype;
+    $config->doctype = NULL;
 
     /**
      * Whether or not to escape X(HT)ML-sensitive characters in script.
@@ -81,12 +81,12 @@ ActiveSupport\Configuration::set('Haml', function($config) {
      * collection. This allows the default filters to be overridden and new
      * filters to be installed. Note: No trailing directory separator.
      */
-    $config->filterDir;
+    $config->filterDir = NULL;
 
     /**
      * Path to the file containing user defined Haml helpers.
      */
-    $config->helperFile;
+    $config->helperFile = NULL;
 
     /**
      * Haml helper class. This must be an instance of HamlHelpers.

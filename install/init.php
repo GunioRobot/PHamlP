@@ -32,12 +32,16 @@ $loader = new ClassLoader(NULL, __DIR__ . '/sass');
 $loader->register();
 
 // register view extension
-View::registerExtensionHandler('haml', 'PHamlP\Haml');
+Application::$config->viewHandlers = array_merge(
+    Application::$config->viewHandlers,
+    array('haml' => 'PHamlP\HamlView')
+);
 
 // convert sass and scss files if setted in options
 $path = Application::$ROOT;
 
-$config = Configuration::get('Sass');
+$config = (array)Configuration::get('Sass');
+$config = array_shift($config);
 
 // set absolute paths
 $config->cache_location = $config->cache_location ? $path . $config->cache_location : NULL;
@@ -54,7 +58,9 @@ $config->sass_location = array_map(function($sassPath) use ($path) {
 
 // scan sass and scss files if needed
 if ($config->scan) {
-    $parser = new SassParser((array)$config);
+
+print_r($configuration);
+    $parser = new SassParser($config);
 
     foreach ($config->sass_location as $path) {
         $files = array_merge(

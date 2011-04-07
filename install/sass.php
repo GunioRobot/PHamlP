@@ -41,13 +41,13 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	 * $name => $options where $name is the name of the extension and $options
 	 * is an array of name=>value options pairs.
 	 */
-	$config->extensions;
+	$config->extensions = NULL;
 
 	/**
 	 * An array of filesystem paths which should be searched for SassScript
 	 * functions.
 	 */
-	$config->function_paths;
+	$config->function_paths = NULL;
 
 	/**
 	 * When TRUE the line number and filename where a selector is defined is
@@ -74,7 +74,7 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	 *     For example: :color #0f3 or :width = $main_width.
 	 * Ignored for SCSS files which always use the new style.
 	 */
-	$config->property_syntax;
+	$config->property_syntax = NULL;
 
 	/**
 	 * When set to TRUE, causes warnings to be disabled.
@@ -100,13 +100,13 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	 *     separate selectors and properties. It's not meant to be
 	 *     human-readable.
 	 */
-	$config->style;
+	$config->style = 'expanded';
 	
 	/**
 	 * The syntax of the input file.
 	 * 'sass' for the indented syntax and 'scss' for the CSS-extension syntax.
 	 */
-	$config->syntax;
+	$config->syntax = NULL;
 
 	/**
 	 * If enabled a property need only be written in the standard form and
