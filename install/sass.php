@@ -13,7 +13,7 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	$config->cache = TRUE;
 
     /**
-     * The path where to search for sass files to compile.
+     * The path or array of paths where to search for sass files to compile.
      */
     $config->sass_location = 'app/stylesheets';
 
@@ -58,8 +58,8 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	 $config->line_numbers = FALSE;
 
 	/**
-	 * An array of paths which should be searched for Sass templates imported
-	 * with the @import directive.
+	 * A path or array of paths which should be searched for Sass templates
+	 * imported with the @import directive.
 	 */
 	$config->load_paths = 'app/stylesheets';
 

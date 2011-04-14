@@ -43,17 +43,25 @@ $path = Application::$ROOT;
 $config = Configuration::get('Sass');
 
 // set absolute paths
+$config->sass_location = array_map(function($sassPath) use ($path) {
+    return $path . $sassPath;
+}, (array)$config->sass_location);
+
 $config->cache_location = $config->cache_location ? $path . $config->cache_location : NULL;
 
 $config->css_location = $config->css_location ? $path . $config->css_location : NULL;
 
+$config->extensions = array_map(function($extension) use ($path) {
+    return $path . $extension;
+}, (array)$config->extensions);
+
+$config->function_paths = array_map(function($functionPath) use ($path) {
+    return $path . $functionPath;
+}, (array)$config->function_paths);
+
 $config->load_paths = array_map(function($loadPath) use ($path) {
     return $path . $loadPath;
-}, (array)$config->load_paths);;
-
-$config->sass_location = array_map(function($sassPath) use ($path) {
-    return $path . $sassPath;
-}, (array)$config->sass_location);;
+}, (array)$config->load_paths);
 
 // scan sass and scss files if needed
 if ($config->scan) {
