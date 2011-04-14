@@ -40,8 +40,7 @@ Application::$config->viewHandlers = array_merge(
 // convert sass and scss files if setted in options
 $path = Application::$ROOT;
 
-$config = (array)Configuration::get('Sass');
-$config = array_shift($config);
+$config = Configuration::get('Sass');
 
 // set absolute paths
 $config->cache_location = $config->cache_location ? $path . $config->cache_location : NULL;
@@ -58,9 +57,10 @@ $config->sass_location = array_map(function($sassPath) use ($path) {
 
 // scan sass and scss files if needed
 if ($config->scan) {
+    $aconfig = (array)$config;
+    $aconfig = array_shift($aconfig);
 
-print_r($configuration);
-    $parser = new SassParser($config);
+    $parser = new SassParser($aconfig);
 
     foreach ($config->sass_location as $path) {
         $files = array_merge(
