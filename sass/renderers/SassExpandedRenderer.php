@@ -27,7 +27,7 @@ class SassExpandedRenderer extends SassCompactRenderer {
 	protected function between() {
 	  return " {\n" ;
 	}
-	
+
 	/**
 	 * Renders the brace at the end of the rule
 	 * @return string the brace between the rule and its properties

@@ -8,7 +8,7 @@
  * @package			PHamlP
  * @subpackage	Sass.extensions.compass.functions
  */
- 
+
 /**
  * Compass extension SassScript selectors functions class.
  * A collection of functions for use in SassSCript.
@@ -17,7 +17,7 @@
  */
 class SassExtentionsCompassFunctionsSelectors {
 	const COMMA_SEPARATOR = '/\s*,\s*/';
-	
+
 	private static $defaultDisplay = array(
 		'block' => array('address', 'blockquote', 'center', 'dir', 'div', 'dd',
 			'dl', 'dt', 'fieldset', 'form', 'frameset h1', 'h2', 'h3', 'h4', 'h5',
@@ -35,7 +35,7 @@ class SassExtentionsCompassFunctionsSelectors {
 		'table-row' => array('tr'),
 		'table-cell' => array('th', 'td')
 	);
-	
+
 	# Permute multiple selectors each of which may be comma delimited, the end result is
 	# a new selector that is the equivalent of nesting each under the previous selector.
 	# To illustrate, the following mixins are equivalent:
@@ -50,19 +50,19 @@ class SassExtentionsCompassFunctionsSelectors {
 	public static function nest() {
 		if (func_num_args() < 2)
 			throw new SassScriptFunctionException('nest() requires two or more arguments', array(), SassScriptParser::$context->node);
-			
+
 		$args = func_get_args();
 		$arg = array_shift($args);
 		$ancestors = preg_split(self::COMMA_SEPARATOR, $arg->value);
-		
+
 		foreach ($args as $arg) {
 			$nested = array();
 			foreach (preg_split(self::COMMA_SEPARATOR, $arg->value) as $descenant) {
 				foreach ($ancestors as $ancestor) {
-					$nested[] = "$ancestor $descenant"; 
+					$nested[] = "$ancestor $descenant";
 				}
 			}
-			$ancestors = $nested;		
+			$ancestors = $nested;
 		}
 		sort($nested);
 		return new SassString(join(', ', $nested));
@@ -104,14 +104,14 @@ class SassExtentionsCompassFunctionsSelectors {
 			$to = $from;
 			$from = new SassNumber(1);
 		}
-		
+
 		return new SassString('h' . join(', h', range($from->value, $to->value)));
 	}
-	
+
 	public static function headings($from = null, $to = null) {
 		return self::headers($from, $to);
 	}
-	
+
 	# Return an enumerated set of comma separated selectors.
 	# For example
 	# enumerate('foo', 1, 4) => foo-1, foo-2, foo-3, foo-4
@@ -119,7 +119,7 @@ class SassExtentionsCompassFunctionsSelectors {
 		$_prefix = $prefix->value . (!$separator ? '-' : $separator->value);
 	  return new SassString($_prefix . join(', '.$_prefix, range($from->value, $to->value)));
 	}
-	
+
 	# returns a comma delimited string for all the
 	# elements according to their default css3 display value.
 	public static function elements_of_type($display) {

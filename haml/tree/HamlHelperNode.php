@@ -22,7 +22,7 @@ class HamlHelperNode extends HamlNode {
 	const NAME = 2;
 	const ARGS = 3;
 	const BLOCK = 4;
-	
+
 	/**
 	 * @var string the helper class name
 	 */

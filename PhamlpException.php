@@ -24,7 +24,7 @@ class PhamlpException extends Exception {
 	 * @param array parameters to be applied to the message using <code>strtr</code>.
 	 */
 	public function __construct($category, $message, $params, $object) {
-		parent::__construct(Phamlp::t($category, $message, $params) . 
+		parent::__construct(Phamlp::t($category, $message, $params) .
 			(is_object($object) ? ": {$object->filename}::{$object->line}\nSource: {$object->source}" : '')
 		);
 	}

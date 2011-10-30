@@ -50,7 +50,7 @@ class SassNode {
 	 * @var object source token
 	 */
 	protected $token;
-	
+
 	/**
 	 * Constructor.
 	 * @param object source token
@@ -59,7 +59,7 @@ class SassNode {
 	public function __construct($token) {
 		$this->token = $token;
 	}
-	
+
 	/**
 	 * Getter.
 	 * @param string name of property to get
@@ -126,11 +126,11 @@ class SassNode {
 		else {
 			$this->children[] = $child;
 			$child->parent		= $this;
-			$child->root			= $this->root;			
+			$child->root			= $this->root;
 		}
 		// The child will have children if a debug node has been added
 		foreach ($child->children as $grandchild) {
-			$grandchild->root = $this->root;		
+			$grandchild->root = $this->root;
 		}
 	}
 
@@ -307,9 +307,9 @@ class SassNode {
 		$context->node = $this;
 		return $this->script->interpolate($expression, $context);
 	}
-	
+
 	/**
-	 * Adds a warning to the node. 
+	 * Adds a warning to the node.
 	 * @param string warning message
 	 * @param array line
 	 */
@@ -328,7 +328,7 @@ class SassNode {
 		foreach ($this->children as $child) {
 			$children = array_merge($children, $child->parse($context));
 		} // foreach
-		return $children; 
+		return $children;
 	}
 
 	/**

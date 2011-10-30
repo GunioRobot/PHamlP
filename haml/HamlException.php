@@ -18,7 +18,7 @@ require_once(dirname(__FILE__).'/../PhamlpException.php');
  */
 class HamlException extends PhamlpException {
 	/**
-	 * Haml Exception. 
+	 * Haml Exception.
 	 * @param string Exception message
 	 * @param array parameters to be applied to the message using <code>strtr</code>.
 	 * @param object object with source code and meta data

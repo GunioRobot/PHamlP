@@ -29,7 +29,7 @@ abstract class SassLiteral {
 		'SassNumber'  => 'number',
 		'SassString'  => 'string'
 	);
-	
+
 	/**
 	 * @var mixed value of the literal type
 	 */
@@ -59,7 +59,7 @@ abstract class SassLiteral {
 			throw new SassLiteralException('No getter function for {what}', array('{what}'=>$name), array(), SassScriptParser::$context->node);
 		}
 	}
-	
+
 	public function __toString() {
 		return $this->toString();
 	}
@@ -87,7 +87,7 @@ abstract class SassLiteral {
 	protected function getValue() {
 		throw new SassLiteralException('Child classes must override this method', array(), SassScriptParser::$context->node);
 	}
-	
+
 	/**
 	 * Adds a child object to this.
 	 * @param sassLiteral the child object
@@ -233,7 +233,7 @@ abstract class SassLiteral {
 	public function op_xor($other) {
 		return new SassBoolean($this->toBoolean() xor $other->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript not operation.
 	 * @return SassBoolean SassBoolean object with the value true if the
@@ -242,7 +242,7 @@ abstract class SassLiteral {
 	public function op_not() {
 		return new SassBoolean(!$this->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript > operation.
 	 * @param sassLiteral the value to compare to this
@@ -252,7 +252,7 @@ abstract class SassLiteral {
 	public function op_gt($other) {
 		return new SassBoolean($this->value > $other->value);
 	}
-	
+
 	/**
 	 * The SassScript >= operation.
 	 * @param sassLiteral the value to compare to this
@@ -262,7 +262,7 @@ abstract class SassLiteral {
 	public function op_gte($other) {
 		return new SassBoolean($this->value >= $other->value);
 	}
-	
+
 	/**
 	 * The SassScript < operation.
 	 * @param sassLiteral the value to compare to this
@@ -272,7 +272,7 @@ abstract class SassLiteral {
 	public function op_lt($other) {
 		return new SassBoolean($this->value < $other->value);
 	}
-	
+
 	/**
 	 * The SassScript <= operation.
 	 * @param sassLiteral the value to compare to this
@@ -282,7 +282,7 @@ abstract class SassLiteral {
 	public function op_lte($other) {
 		return new SassBoolean($this->value <= $other->value);
 	}
-	
+
 	/**
 	 * The SassScript == operation.
 	 * @param sassLiteral the value to compare to this
@@ -292,7 +292,7 @@ abstract class SassLiteral {
 	public function op_eq($other) {
 		return new SassBoolean($this == $other);
 	}
-	
+
 	/**
 	 * The SassScript != operation.
 	 * @param sassLiteral the value to compare to this
@@ -302,7 +302,7 @@ abstract class SassLiteral {
 	public function op_neq($other) {
 		return new SassBoolean(!$this->op_eq($other)->toBoolean());
 	}
-	
+
 	/**
 	 * The SassScript default operation (e.g. $a $b, "foo" "bar").
 	 * @param sassLiteral the value to concatenate with a space to this
@@ -320,9 +320,9 @@ abstract class SassLiteral {
 	public function op_comma($other) {
 		return new SassString($this->toString().', '.$other->toString());
 	}
-	
+
 	/**
-	 * Asserts that the literal is the expected type 
+	 * Asserts that the literal is the expected type
 	 * @param SassLiteral the literal to test
 	 * @param string expected type
 	 * @throws SassScriptFunctionException if value is not the expected type
@@ -332,9 +332,9 @@ abstract class SassLiteral {
 			throw new SassScriptFunctionException('{what} must be a {type}', array('{what}'=>($literal instanceof SassLiteral ? $literal->typeOf : 'literal'), '{type}'=>$type), SassScriptParser::$context->node);
 		}
 	}
-	
+
 	/**
-	 * Asserts that the value of a literal is within the expected range 
+	 * Asserts that the value of a literal is within the expected range
 	 * @param SassLiteral the literal to test
 	 * @param float the minimum value
 	 * @param float the maximum value

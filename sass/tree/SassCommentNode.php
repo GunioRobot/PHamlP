@@ -19,23 +19,23 @@ class SassCommentNode extends SassNode {
 	const NODE_IDENTIFIER = '/';
 	const MATCH = '%^/\*\s*(.*?)\s*(\*/)?$%s';
 	const COMMENT = 1;
-	
-	private $value; 
-	
+
+	private $value;
+
 	/**
 	 * SassCommentNode constructor.
 	 * @param object source token
 	 * @return CommentNode
 	 */
 	public function __construct($token) {
-		parent::__construct($token);		
+		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		$this->value = $matches[self::COMMENT];
 	}
-	
+
 	protected function getValue() {
-		return $this->value; 
-	} 
+		return $this->value;
+	}
 
 	/**
 	 * Parse this node.

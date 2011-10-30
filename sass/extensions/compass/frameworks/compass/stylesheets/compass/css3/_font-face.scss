@@ -15,8 +15,8 @@
     font-family: quote($name);
     @if $eot {
       src: font-url($eot); }
-    src: local("☺"), $font-files; 
-  } 
+    src: local("☺"), $font-files;
+  }
 }
 
 // EXAMPLE
@@ -24,10 +24,10 @@
 //
 // will generate:
 //
-//   @font-face { 
-//     font-family: 'this name'; 
-//     src: url('fonts/this.eot'); 
+//   @font-face {
+//     font-family: 'this name';
+//     src: url('fonts/this.eot');
 //     src: local("☺"),
-//       url('fonts/this.otf') format('woff'), 
-//       url('fonts/this.woff') format('opentype'); 
+//       url('fonts/this.otf') format('woff'),
+//       url('fonts/this.woff') format('opentype');
 //   }

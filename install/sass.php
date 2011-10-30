@@ -65,7 +65,7 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 
 	/**
 	 * Forces the document to use one syntax for properties. If the correct
-	 * syntax isn't used, an error is thrown. 
+	 * syntax isn't used, an error is thrown.
 	 * Value can be:
 	 *   - new: forces the use of a colon or equals sign after the property
 	 *     name.
@@ -101,7 +101,7 @@ ActiveSupport\Configuration::set('Sass', function($config) {
 	 *     human-readable.
 	 */
 	$config->style = 'expanded';
-	
+
 	/**
 	 * The syntax of the input file.
 	 * 'sass' for the indented syntax and 'scss' for the CSS-extension syntax.

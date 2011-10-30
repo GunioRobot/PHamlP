@@ -48,19 +48,19 @@ class SassVariableNode extends SassNode {
 		parent::__construct($token);
 		preg_match(self::MATCH, $token->source, $matches);
 		if (empty($matches[self::NAME]) || ($matches[self::VALUE] === '')) {
-			throw new SassVariableNodeException('Invalid variable definition; name and expression required', array(), $this);			
+			throw new SassVariableNodeException('Invalid variable definition; name and expression required', array(), $this);
 		}
 		$this->name = $matches[self::NAME];
 		$this->value = $matches[self::VALUE];
 		$this->isDefault = (!empty($matches[self::SASS_DEFAULT]) || !empty($matches[self::SCSS_DEFAULT]));
-		
+
 		// Warn about deprecated features
 		if ($matches[self::IDENTIFIER] === self::SASS_IDENTIFIER) {
 			$this->addWarning('Variables prefixed with "!" is deprecated; use "${name}"', array('{name}'=>$this->name));
 		}
 		if (!empty($matches[SassVariableNode::SASS_ASSIGNMENT])) {
 			$this->addWarning('Setting variables with "{sassDefault}=" is deprecated; use "${name}: {value}{scssDefault}"', array('{sassDefault}'=>(!empty($matches[SassVariableNode::SASS_DEFAULT])?'||':''), '{name}'=>$this->name, '{value}'=>$this->value, '{scssDefault}'=>(!empty($matches[SassVariableNode::SASS_DEFAULT])?' !default':'')));
-		}		
+		}
 	}
 
 	/**
@@ -74,7 +74,7 @@ class SassVariableNode extends SassNode {
 				$context->setVariable(
 					$this->name, $this->evaluate($this->value, $context)
 				);
-		}		
+		}
 		$this->parseChildren($context); // Parse any warnings
 		return array();
 	}

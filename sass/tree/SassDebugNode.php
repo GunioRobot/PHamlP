@@ -53,7 +53,7 @@ class SassDebugNode extends SassNode {
 		else {
 			preg_match(self::MATCH, $token->source, $matches);
 			$this->message = $matches[self::MESSAGE];
-			$this->warning = $message;			
+			$this->warning = $message;
 		}
 		$this->params = $params;
 	}
@@ -67,7 +67,7 @@ class SassDebugNode extends SassNode {
 		if (!$this->warning || ($this->root->parser->quiet === false)) {
 			set_error_handler(array($this, 'errorHandler'));
 			trigger_error(($this->warning ? $this->interpolate(Phamlp::t('sass', $this->message, $this->params), $context) : $this->evaluate(Phamlp::t('sass', $this->message, $this->params), $context)->toString()));
-			restore_error_handler();			
+			restore_error_handler();
 		}
 
 		return array();
@@ -75,8 +75,8 @@ class SassDebugNode extends SassNode {
 
 	/**
 	 * Error handler for degug and warning statements.
-	 * @param int Error number 
-	 * @param string Message 
+	 * @param int Error number
+	 * @param string Message
 	 */
 	public function errorHandler($errno, $message) {
 		echo '<div style="background-color:#ce4dd6;border-bottom:1px dashed #88338d;color:white;font:10pt verdana;margin:0;padding:0.5em 2%;width:96%;"><p style="height:auto;margin:0.25em 0;padding:0;width:100%;"><span style="font-weight:bold;">SASS '.($this->warning ? 'WARNING' : 'DEBUG').":</span> $message</p><p style=\"margin:0.1em;padding:0;padding-left:0.5em;width:100%;\">{$this->filename}::{$this->line}</p><p style=\"margin:0.1em;padding:0;padding-left:0.5em;width:100%;\">Source: {$this->source}</p></div>";

@@ -8,7 +8,7 @@
  * @package			PHamlP
  * @subpackage	Sass.script.literals
  */
- 
+
 /**
  * SassVariable class.
  * @package			PHamlP
@@ -19,7 +19,7 @@ class SassScriptVariable {
 	 * Regex for matching and extracting Variables
 	 */
 	const MATCH = '/^(?<!\\\\)(?(?!!important\b)[!\$]([\w-]+))/';
-	
+
 	/**
 	 * @var string name of variable
 	 */

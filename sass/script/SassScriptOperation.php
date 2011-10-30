@@ -47,13 +47,13 @@ class SassScriptOperation {
 		'#{'	=> array('begin_interpolation'),
 		'}'		=> array('end_interpolation'),
 	);
-	
+
 	/**
 	 * @var array operators with meaning in uquoted strings;
 	 * selectors, property names and values
 	 */
 	public static $inStrOperators = array(',', '#{');
- 
+
 	/**
 	 * @var array default operator token.
 	 */
@@ -121,7 +121,7 @@ class SassScriptOperation {
 		if (count($operands) !== $this->operandCount) {
 			throw new SassScriptOperationException('Incorrect operand count for {operation}; expected {expected}, received {received}', array('{operation}'=>get_class($operands[0]), '{expected}'=>$this->operandCount, '{received}'=>count($operands)), SassScriptParser::$context->node);
 		}
-		
+
 		if (count($operands) > 1 && is_null($operands[1])) {
 			$operation = 'op_unary_' . $this->operator;
 		}
@@ -131,7 +131,7 @@ class SassScriptOperation {
 				$operands = array_reverse($operands);
 			}
 		}
-		
+
 		if (method_exists($operands[0], $operation)) {
 		    $op = clone $operands[0];
 			return $op->$operation(!empty($operands[1]) ? $operands[1] : null);

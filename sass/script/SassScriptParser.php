@@ -24,7 +24,7 @@ class SassScriptParser {
 	const DEFAULT_ENV = 0;
 	const CSS_RULE = 1;
 	const CSS_PROPERTY = 2;
-	
+
 	/**
 	 * @var SassContext Used for error reporting
 	 */
@@ -82,7 +82,7 @@ class SassScriptParser {
 		$operands = array();
 
 		$tokens = $this->parse($expression, $context, $environment);
-		
+
 		while (count($tokens)) {
 			$token = array_shift($tokens);
 			if ($token instanceof SassScriptFunction) {
@@ -117,7 +117,7 @@ class SassScriptParser {
 		$outputQueue = array();
 		$operatorStack = array();
 		$parenthesis = 0;
-		
+
 		$tokens = $this->lexer->lex($expression, $context);
 
 		foreach($tokens as $i=>$token) {
@@ -129,7 +129,7 @@ class SassScriptParser {
 				}
 				else {
 					continue;
-				}				
+				}
 			}
 			elseif ($token instanceof SassScriptVariable) {
 				$token = $token->evaluate($context);
@@ -139,7 +139,7 @@ class SassScriptParser {
 			// If the token is a number or function add it to the output queue.
  			if ($token instanceof SassLiteral || $token instanceof SassScriptFunction) {
  				if ($environment === self::CSS_PROPERTY && $token instanceof SassNumber && !$parenthesis) {
-					$token->inExpression = false; 
+					$token->inExpression = false;
  				}
 				array_push($outputQueue, $token);
 			}

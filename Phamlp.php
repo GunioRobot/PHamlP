@@ -21,7 +21,7 @@ class Phamlp {
 	 * @var array Messages used for translation
 	 */
 	public static $messages;
-	
+
 	/**
 	 * Translates a message to the specified language.
 	 * @param string message category.

@@ -8,7 +8,7 @@
  * @package			PHamlP
  * @subpackage	Sass.extensions.compass.functions
  */
- 
+
 /**
  * Compass extension SassScript image size functions class.
  * A collection of functions for use in SassSCript.

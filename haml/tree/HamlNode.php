@@ -60,7 +60,7 @@ class HamlNode {
 	/**
 	 * @var HamlRenderer Renderer object
 	 */
-	private $_r; 
+	private $_r;
 	/**
 	 * @var array Options
 	 */
@@ -71,7 +71,7 @@ class HamlNode {
 	  if (!is_null($parent)) { // $parent === null for "else" code blocks
 		  $this->parent = $parent;
 		  $this->root = $parent->root;
-		  $parent->children[] = $this;			
+		  $parent->children[] = $this;
 	  }
 
 	}

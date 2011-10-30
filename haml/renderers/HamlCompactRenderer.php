@@ -22,7 +22,7 @@ class HamlCompactRenderer extends HamlRenderer {
 	public function renderOpeningTag($node) {
 	  return ($node->isBlock ? '' : ' ') . parent::renderOpeningTag($node);
 	}
-	
+
 	/**
 	 * Renders the closing tag of an element
 	 */

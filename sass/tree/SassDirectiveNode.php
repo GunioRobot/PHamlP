@@ -27,7 +27,7 @@ class SassDirectiveNode extends SassNode {
 	public function __construct($token) {
 		parent::__construct($token);
 	}
-	
+
 	protected function getDirective() {
 		preg_match('/^(@[\w-]+)(?:\s*(\w+))*/', $this->token->source, $matches);
 		array_shift($matches);

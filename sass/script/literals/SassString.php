@@ -10,7 +10,7 @@
  */
 
 require_once('SassLiteral.php');
- 
+
 /**
  * SassString class.
  * Provides operations and type testing for Sass strings.
@@ -22,11 +22,11 @@ class SassString extends SassLiteral {
   const _MATCH = '/^(["\'])(.*?)(\1)?$/'; // Used to match strings such as "Times New Roman",serif
   const VALUE = 2;
   const QUOTE = 3;
-  
+
   /**
    * @var string string quote type; double or single quotes, or unquoted.
    */
-  private $quote; 
+  private $quote;
 
 	/**
 	 * class constructor
@@ -37,11 +37,11 @@ class SassString extends SassLiteral {
 		preg_match(self::_MATCH, $value, $matches);
 		if ((isset($matches[self::QUOTE]))) {
 			$this->quote =  $matches[self::QUOTE];
-			$this->value = $matches[self::VALUE];			
+			$this->value = $matches[self::VALUE];
 		}
 		else {
 			$this->quote =  '';
-			$this->value = $value;			
+			$this->value = $value;
 		}
 	}
 
@@ -89,7 +89,7 @@ class SassString extends SassLiteral {
 	public function toString() {
 		return $this->quote.$this->value.$this->quote;
 	}
-	
+
 	public function toVar() {
 		return SassScriptParser::$context->getVariable($this->value);
 	}

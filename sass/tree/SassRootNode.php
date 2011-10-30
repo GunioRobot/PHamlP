@@ -41,7 +41,7 @@ class SassRootNode extends SassNode {
 	 * @param SassParser Sass parser
 	 * @return SassNode
 	 */
-	public function __construct($parser) { 
+	public function __construct($parser) {
 		parent::__construct((object) array(
 			'source' => '',
 			'level' => -1,
@@ -79,15 +79,15 @@ class SassRootNode extends SassNode {
 		} // foreach
 		return $output;
 	}
-	
+
 	public function extend($extendee, $selectors) {
 		$this->extenders[$extendee] = (isset($this->extenders[$extendee])
-			? array_merge($this->extenders[$extendee], $selectors) : $selectors);		
+			? array_merge($this->extenders[$extendee], $selectors) : $selectors);
 	}
-	
+
 	public function getExtenders() {
-		return $this->extenders;  
-	} 
+		return $this->extenders;
+	}
 
 	/**
 	 * Returns a value indicating if the line represents this type of node.

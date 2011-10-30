@@ -2,8 +2,8 @@
 /* SVN FILE: $Id$ */
 /**
  * Textile Filter for {@link http://haml-lang.com/ Haml} class file.
- * This filter is an abstract filter that must be extended. 
- * 
+ * This filter is an abstract filter that must be extended.
+ *
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright		Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
@@ -14,7 +14,7 @@
 /**
  * Textile Filter for {@link http://haml-lang.com/ Haml} class.
  * Parses the text with Textile.
- * 
+ *
  * This is an abstract class that must be extended and the init() method
  * implemented to provide the vendorPath if the vendor class is not imported
  * elsewhere in the application (e.g. by a framework) and vendorClass if the
@@ -32,7 +32,7 @@ abstract class _HamlTextileFilter extends HamlBaseFilter {
 	 * Override this value if the class name is different in your environment
 	 */
 	protected $vendorClass = 'Textile';
-	
+
 	/**
 	 * Child classes must implement this method.
 	 * Typically the child class will set $vendorPath and $vendorClass

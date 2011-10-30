@@ -58,7 +58,7 @@ class SassPropertyNode extends SassNode {
 		'before',
 		'after'
 	);
-	
+
 	/**
 	 * @var string property name
 	 */
@@ -112,7 +112,7 @@ class SassPropertyNode extends SassNode {
 	  if ($this->children) {
 			$return = array_merge($return, $this->parseChildren($context));
 	  }
-	  return $return; 
+	  return $return;
 	}
 
 	/**
@@ -188,13 +188,13 @@ class SassPropertyNode extends SassNode {
 			$syntax = $token['syntax'];
 			$token = $token['token'];
 		}
-		
+
 		$matches = self::match($token, $syntax);
 
-		if (!empty($matches)) {	
+		if (!empty($matches)) {
 			if (isset($matches[self::VALUE]) &&
 					self::isPseudoSelector($matches[self::VALUE])) {
-				return false; 
+				return false;
 			}
 	  	if ($token->level === 0) {
 	  		throw new SassPropertyNodeException('Properties can not be assigned at root level', array(), null);
@@ -230,7 +230,7 @@ class SassPropertyNode extends SassNode {
 		}
 		return $matches;
 	}
-	
+
 	/**
 	 * Returns a value indicating if the string starts with a pseudo selector.
 	 * This is used to reject pseudo selectors as property values as, for example,
@@ -238,7 +238,7 @@ class SassPropertyNode extends SassNode {
 	 * match regex.
 	 * It will also match interpolation to allow for constructs such as
 	 * content:#{$pos}
-	 * @see isa() 
+	 * @see isa()
 	 * @param string the string to test
 	 * @return bool true if the string starts with a pseudo selector, false if not
 	 */

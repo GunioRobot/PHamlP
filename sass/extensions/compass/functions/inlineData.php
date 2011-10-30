@@ -8,7 +8,7 @@
  * @package			PHamlP
  * @subpackage	Sass.extensions.compass.functions
  */
- 
+
 /**
  * Compass extension SassScript inline data functions class.
  * A collection of functions for use in SassSCript.
@@ -41,7 +41,7 @@ class SassExtentionsCompassFunctionsInlineData {
 
 	private function compute_mime_type($path, $mime_type = null) {
 		if ($mime_type) return $mime_type;
-		
+
 		switch (true) {
 			case preg_match('/\.png$/i', $path):
 				return 'image/png';

@@ -8,7 +8,7 @@
  * @package			PHamlP
  * @subpackage	Sass.extensions.compass.functions
  */
- 
+
 /**
  * Compass extension SassScript lists functions class.
  * A collection of functions for use in SassSCript.
@@ -17,7 +17,7 @@
  */
 class SassExtentionsCompassFunctionsLists {
 	const SPACE_SEPARATOR = '/\s+/';
-	
+
 	# Return the first value from a space separated list.
 	public static function first_value_of($list) {
 		if ($list instanceof SassString) {
@@ -26,7 +26,7 @@ class SassExtentionsCompassFunctionsLists {
 		}
 		else return $list;
 	}
-	
+
 	# Return the nth value from a space separated list.
 	public static function nth_value_of($list, $n) {
 		if ($list instanceof SassString) {
@@ -35,7 +35,7 @@ class SassExtentionsCompassFunctionsLists {
 		}
 		else return $list;
 	}
-	
+
 	# Return the last value from a space separated list.
 	public static function last_value_of($list) {
 		if ($list instanceof SassString) {

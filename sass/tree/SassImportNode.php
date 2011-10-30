@@ -36,7 +36,7 @@ class SassImportNode extends SassNode {
 		preg_match(self::MATCH, $token->source, $matches);
 		foreach (explode(',', $matches[self::FILES]) as $file) {
 			$this->files[] = trim($file);
-		}		
+		}
 	}
 
 	/**

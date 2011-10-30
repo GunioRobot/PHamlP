@@ -29,7 +29,7 @@ class HamlElementNode extends HamlNode {
 		$renderer = $this->renderer;
 		$this->output = $renderer->renderOpeningTag($this);
 		$close = $renderer->renderClosingTag($this);
-		
+
 		if ($this->whitespaceControl['outer']['left']) {
 			$this->output = ltrim($this->output);
 			$close = rtrim($close);

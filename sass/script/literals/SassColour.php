@@ -10,26 +10,26 @@
  */
 
 require_once('SassLiteral.php');
- 
+
 /**
  * SassColour class.
  * A SassScript object representing a CSS colour.
- * 
+ *
  * A colour may be represented internally as RGBA, HSLA, or both. It is
  * originally represented as whatever its input is; if it’s created with RGB
  * values, it’s represented as RGBA, and if it’s created with HSL values, it’s
  * represented as HSLA. Once a property is accessed that requires the other
  * representation – for example, SassColour::red for an HSL color – that
  * component is calculated and cached.
- * 
+ *
  * The alpha channel of a color is independent of its RGB or HSL representation.
  * It’s always stored, as 1 if nothing else is specified. If only the alpha
  * channel is modified using SassColour::with(), the cached RGB and HSL values
  * are retained.
- * 
+ *
  * Colour operations are all piecewise, e.g. when adding two colours each
  * component is added independantly; Rr = R1 + R2, Gr = G1 + G2, Br = B1 + B2.
- * 
+ *
  * Colours are returned as a named colour if possible or #rrggbb.
  *
  * @package			PHamlP
@@ -224,7 +224,7 @@ class SassColour extends SassLiteral {
 	);
 
 	static private $regex;
-	
+
 	/**@#+
 	 * RGB colour components
 	 */
@@ -341,7 +341,7 @@ class SassColour extends SassLiteral {
 			throw new SassColourException('{what} must be a {type}', array('{what}'=>'Colour', '{type}'=>'array'), SassScriptParser::$context->node);
 		}
 	}
-	
+
 	/**
 	 * Colour addition
 	 * @param mixed SassColour|SassNumber value to add
@@ -582,7 +582,7 @@ class SassColour extends SassLiteral {
 		$this->blue  = $this->getBlue()  >> $other->value;
 		return $this;
 	}
-	
+
 	/**
 	* Returns a copy of this colour with one or more channels changed.
 	* RGB or HSL attributes may be changed, but not both at once.
@@ -606,7 +606,7 @@ class SassColour extends SassLiteral {
 				), $attributes);
 		}
 		return new SassColour($colour);
-	} 
+	}
 
 	/**
 	 * Returns the alpha component (opacity) of this colour.
@@ -737,8 +737,8 @@ class SassColour extends SassLiteral {
  	 * @return string the colour as a named colour, rgba(r,g,g,a) or #rrggbb
 	 */
 	public function toString($css3 = false) {
-		$rgba = $this->rgba;	
-		
+		$rgba = $this->rgba;
+
 		if ($rgba[3] == 0) {
 			return 'transparent';
 		}
@@ -761,7 +761,7 @@ class SassColour extends SassLiteral {
 				self::$_html4Colours[$colour] : $colour);
 		}
 	}
-	
+
 	/**
 	 * Converts from HSL to RGB colourspace
 	 * Algorithm from the CSS3 spec: {@link http://www.w3.org/TR/css3-color/#hsl-color}
@@ -771,21 +771,21 @@ class SassColour extends SassLiteral {
 		$h = $this->hue/360;
 		$s = $this->saturation/100;
 		$l = $this->lightness/100;
-		
+
 		$m1 = ($l <= 0.5 ? $l * ($s + 1) : $l + $s - $l * $s);
 		$m2 = $l * 2 - $m1;
-		
+
 		$this->red   = $this->hue2rgb($m1, $m2, $h + 1/3);
 		$this->green = $this->hue2rgb($m1, $m2, $h);
 		$this->blue  = $this->hue2rgb($m1, $m2, $h - 1/3);
 	}
-	
+
 	/**
 	 * Converts from hue to RGB colourspace
 	 */
 	private function hue2rgb($m1, $m2, $h) {
 		$h += ($h < 0 ? 1 : ($h > 1 ? -1 : 0));
-		
+
 		if ($h * 6 < 1) {
 			$c = $m2 + ($m1 - $m2) * $h * 6;
 		}
@@ -798,9 +798,9 @@ class SassColour extends SassLiteral {
 		else {
 			$c = $m2;
 		}
-		return $c * 255; 
+		return $c * 255;
 	}
-	
+
 	/**
 	 * Converts from RGB to HSL colourspace
 	 * Algorithm adapted from {@link http://en.wikipedia.org/wiki/HSL_and_HSV#Conversion_from_RGB_to_HSL_or_HSV}
@@ -810,14 +810,14 @@ class SassColour extends SassLiteral {
 		$max = max($rgb);
 		$min = min($rgb);
 		$c = $max - $min;
-		
+
 		// Lightness
 		$l = ($max + $min)/2;
 		$this->lightness = $l * 100;
-		
+
 		// Saturation
 		$this->saturation = ($c ? ($l <= 0.5 ? $c/(2 * $l) : $c/(2 - 2 * $l)) : 0 ) * 100;
-		
+
 		// Hue
 		switch($max) {
 			case $min:
@@ -835,7 +835,7 @@ class SassColour extends SassLiteral {
 		}
 		$this->hue = fmod($h, 360);
 	}
-	
+
 	/**
 	* Asserts that the colour space is valid.
 	* Returns the name of the colour space: 'rgb' if red, green, or blue keys given;
@@ -860,7 +860,7 @@ class SassColour extends SassLiteral {
 			if ($all && (!array_key_exists('hue', $colour) || !array_key_exists('saturation', $colour) || !array_key_exists('lightness', $colour))) {
 				throw new SassColourException('SassColour must have all {colourSpace} keys specified', array('{colourSpace}'=>'HSL'), SassScriptParser::$context->node);
 			}
-			return 'hsl';		
+			return 'hsl';
 		}
 		elseif ($all && sizeof($colour) < 3) {
 				throw new SassColourException('SassColour array must have at least 3 elements', array(), SassScriptParser::$context->node);

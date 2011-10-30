@@ -29,7 +29,7 @@ class HamlFilterNode extends HamlNode {
 	 * @return HamlFilterNode
 	 */
 	public function __construct($filter, $parent) {
-	  $this->filter = $filter;	  
+	  $this->filter = $filter;
 	  $this->parent = $parent;
 	  $this->root = $parent->root;
 	  $parent->children[] = $this;

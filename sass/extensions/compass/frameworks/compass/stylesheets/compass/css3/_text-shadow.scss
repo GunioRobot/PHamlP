@@ -20,6 +20,6 @@ $default-text-shadow-blur:     1px  !default;
   @if $color == none {
     text-shadow: none;
   } @else {
-    text-shadow: $color $hoff $voff $blur;    
+    text-shadow: $color $hoff $voff $blur;
   }
 }

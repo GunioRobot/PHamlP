@@ -81,13 +81,13 @@ class HamlRenderer {
 				{
 					$output .= "<"."?php if(isset($value) && !empty($value)): ?"."> $name={$this->attrWrapper}<"."?php echo $value; ?".">{$this->attrWrapper};<"."?php endif; ?".">";
 				}
-				
+
 				// $value is either a method, a constant or a ternary operator
 				else
 				{
-					$output .= "<"."?php if($value): ?"."> $name={$this->attrWrapper}<"."?php echo $value; ?".">{$this->attrWrapper};<"."?php endif; ?".">";					
+					$output .= "<"."?php if($value): ?"."> $name={$this->attrWrapper}<"."?php echo $value; ?".">{$this->attrWrapper};<"."?php endif; ?".">";
 				}
-			} 
+			}
 			else
 			{
 				$output .= " $name={$this->attrWrapper}$value{$this->attrWrapper}";

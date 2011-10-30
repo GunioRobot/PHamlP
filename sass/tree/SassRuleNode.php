@@ -39,7 +39,7 @@ class SassRuleNode extends SassNode {
 	 * @var array resolved selectors
 	 */
 	private $resolvedSelectors = array();
-	
+
 	/**
 	 * @var boolean whether the node expects more selectors
 	 */
@@ -109,12 +109,12 @@ class SassRuleNode extends SassNode {
 
 		return $this->renderer->renderRule($this, $properties, $rules);
 	}
-	
+
 	/**
 	 * Extend this nodes selectors
 	 * $extendee is the subject of the @extend directive
 	 * $extender is the selector that contains the @extend directive
-	 * $selector a selector or selector sequence that is to be extended 
+	 * $selector a selector or selector sequence that is to be extended
 	 */
 	public function extend() {
 		foreach ($this->root->extenders as $extendee=>$extenders) {
@@ -140,7 +140,7 @@ class SassRuleNode extends SassNode {
 			}
 		}
 	}
-	
+
 	/**
 	 * Tests whether the selector is a psuedo selector
 	 * @param string selector to test
@@ -149,7 +149,7 @@ class SassRuleNode extends SassNode {
 	private function isPsuedo($selector) {
 		return strpos($selector, ':') !== false;
 	}
-	
+
 	/**
 	 * Tests whether the selector is a sequence selector
 	 * @param string selector to test
@@ -158,27 +158,27 @@ class SassRuleNode extends SassNode {
 	private function isSequence($selector) {
 		return strpos($selector, ' ') !== false;
 	}
-	
+
 	/**
 	 * Merges selector sequences
 	 * @param string the extender selector
 	 * @param string selector to extend
-	 * @return array the merged sequences 
+	 * @return array the merged sequences
 	 */
 	private function mergeSequence($extender, $selector) {
 		$extender = explode(' ', $extender);
 		$end = ' '.array_pop($extender);
 		$selector = explode(' ', $selector);
 		array_pop($selector);
-		
+
 		$common = array();
 		while($extender[0] === $selector[0]) {
 			$common[] = array_shift($selector);
 			array_shift($extender);
 		}
-		
+
 		$begining = (!empty($common) ? join(' ', $common) . ' ' : '');
-		
+
 		return array(
 			$begining.join(' ', $selector).' '.join(' ', $extender).$end,
 			$begining.join(' ', $extender).' '.join(' ', $selector).$end
@@ -192,7 +192,7 @@ class SassRuleNode extends SassNode {
 	public function getSelectors() {
 		return $this->selectors;
 	}
-	
+
 	/**
 	 * Resolves selectors.
 	 * Interpolates SassScript in selectors and resolves any parent references or
@@ -202,7 +202,7 @@ class SassRuleNode extends SassNode {
 	public function resolveSelectors($context) {
 		$resolvedSelectors = array();
 		$this->parentSelectors = $this->getParentSelectors($context);
-		
+
 		foreach ($this->selectors as $key=>$selector) {
 			$selector = $this->interpolate($selector, $context);
 			//$selector = $this->evaluate($this->interpolate($selector, $context), $context)->toString();
@@ -281,7 +281,7 @@ class SassRuleNode extends SassNode {
 	 * @return string selector with parent references resolved
 	 */
 	private function resolveParentReferences($selector, $context) {
-		$resolvedReferences = array(); 
+		$resolvedReferences = array();
 		if (!count($this->parentSelectors)) {
 			throw new SassRuleNodeException('Can not use parent selector (' .
 					self::PARENT_REFERENCE . ') when no parent selectors', array(), $this);
@@ -304,7 +304,7 @@ class SassRuleNode extends SassNode {
 		$inString = false;
 		$interpolate = false;
 		$selector = '';
-		
+
 		for ($i = 0, $l = strlen($string); $i < $l; $i++) {
 			$c = $string[$i];
 			if ($c === self::CONTINUED && !$inString && !$interpolate) {

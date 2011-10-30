@@ -22,7 +22,7 @@ require_once('SassCompressedRenderer.php');
 class SassCompactRenderer extends SassCompressedRenderer {
 	const DEBUG_INFO_RULE = '@media -sass-debug-info';
 	const DEBUG_INFO_PROPERTY = 'font-family';
-	
+
 	/**
 	 * Renders the brace between the selectors and the properties
 	 * @return string the brace between the selectors and the properties
@@ -106,7 +106,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 	protected function renderDebug($node) {
 		$indent = $this->getIndent($node);
 		$debug = '';
-		
+
 		if ($node->debug_info) {
 			$debug  = $indent . self::DEBUG_INFO_RULE . '{';
 			$debug .= 'filename{' . self::DEBUG_INFO_PROPERTY . ':' . preg_replace('/([^-\w])/', '\\\\\1', "file://{$node->filename}") . ';}';
@@ -116,7 +116,7 @@ class SassCompactRenderer extends SassCompressedRenderer {
 		elseif ($node->line_numbers) {
 			$debug .= "$indent/* line {$node->line} {$node->filename} */\n";
 		}
-		return $debug; 
+		return $debug;
 	}
 
 	/**

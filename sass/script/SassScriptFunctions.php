@@ -1,7 +1,7 @@
 <?php
 /**
  * SassScript functions class file.
- * 
+ *
  * Methods in this module are accessible from the SassScript context.
  * For example, you can write:
  *
@@ -22,14 +22,14 @@
  * Keep in mind that Sass stylesheets are only compiled once and then left as
  * static CSS files. Any dynamic CSS should be left in <style> tags in the
  * HTML.
- * 
+ *
  * @author			Chris Yates <chris.l.yates@gmail.com>
  * @copyright 	Copyright (c) 2010 PBM Web Development
  * @license			http://phamlp.googlecode.com/files/license.txt
  * @package			PHamlP
  * @subpackage	Sass.script
  */
- 
+
 /**
  * SassScript functions class.
  * A collection of functions for use in SassSCript.
@@ -39,11 +39,11 @@
 class SassScriptFunctions {
 	const DECREASE = false;
 	const INCREASE = true;
-	
+
 	/*
 	 * Colour Creation
 	 */
-	
+
 	/**
 	 * Creates a SassColour object from red, green, and blue values.
 	 * @param SassNumber the red component.
@@ -58,9 +58,9 @@ class SassScriptFunctions {
 	public static function rgb($red, $green, $blue) {
 		return self::rgba($red, $green, $blue, new SassNumber(1));
 	}
-	
+
 	/**
-	 * Creates a SassColour object from red, green, and blue values and alpha 
+	 * Creates a SassColour object from red, green, and blue values and alpha
 	 * channel (opacity).
 	 * There are two overloads:
 	 * * rgba(red, green, blue, alpha)
@@ -75,9 +75,9 @@ class SassScriptFunctions {
 	 * * rgba(colour, alpha)
 	 * @param SassColour a SassColour object
 	 * @param SassNumber The alpha channel. A number between 0 and 1.
-	 * 
+	 *
 	 * @return new SassColour SassColour object
-	 * @throws SassScriptFunctionException if any of the red, green, or blue 
+	 * @throws SassScriptFunctionException if any of the red, green, or blue
 	 * colour components are out of bounds, or or the colour is not a colour, or
 	 * alpha is out of bounds
 	 */
@@ -85,7 +85,7 @@ class SassScriptFunctions {
 		switch (func_num_args()) {
 			case 2:
 				$colour = func_get_arg(0);
-				$alpha = func_get_arg(1);					
+				$alpha = func_get_arg(1);
 				SassLiteral::assertType($colour, 'SassColour');
 				SassLiteral::assertType($alpha, 'SassNumber');
 				SassLiteral::assertInRange($alpha, 0, 1);
@@ -113,7 +113,7 @@ class SassScriptFunctions {
 				break;
 			default:
 				throw new SassScriptFunctionException('Incorrect argument count for {method}; expected {expected}, received {received}', array('{method}' => __METHOD__, '{expected}' => '2 or 4', '{received}' => func_num_args()), SassScriptParser::$context->node);
-		}		
+		}
 	}
 
 	/**
@@ -134,7 +134,7 @@ class SassScriptFunctions {
 	}
 
 	/**
-	 * Creates a SassColour object from hue, saturation, lightness and alpha 
+	 * Creates a SassColour object from hue, saturation, lightness and alpha
 	 * channel (opacity).
 	 * @param SassNumber The hue of the colour in degrees.
 	 * Should be between 0 and 360 inclusive
@@ -142,7 +142,7 @@ class SassScriptFunctions {
 	 * Must be between 0% and 100% inclusive
 	 * @param SassNumber The lightness of the colour as a percentage.
 	 * Must be between 0% and 100% inclusive
-	 * @param float The alpha channel. A number between 0 and 1. 
+	 * @param float The alpha channel. A number between 0 and 1.
 	 * @return new SassColour The resulting colour
 	 * @throws SassScriptFunctionException if saturation, lightness or alpha are
 	 * out of bounds
@@ -157,7 +157,7 @@ class SassScriptFunctions {
 		SassLiteral::assertInRange($a, 0,   1);
 		return new SassColour(array('hue'=>$h, 'saturation'=>$s, 'lightness'=>$l, 'alpha'=>$a));
 	}
-	
+
 	/*
 	 * Colour Information
 	 */
@@ -183,7 +183,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($colour, 'SassColour');
 		return new SassNumber($colour->green);
 	}
-	
+
 	/**
 	 * Returns the blue component of a colour.
 	 * @param SassColour The colour
@@ -249,7 +249,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($colour, 'SassColour');
 		return new SassNumber($colour->alpha);
 	}
-	
+
 	/*
 	 * Colour Adjustments
 	 */
@@ -416,7 +416,7 @@ class SassScriptFunctions {
 	public static function fade_out($colour, $amount, $ofCurrent = false) {
 		return self::transparentize($colour, $amount, $ofCurrent);
 	}
-	
+
 	/**
 	 * Returns the complement of a colour.
 	 * Rotates the hue by 180 degrees.
@@ -476,7 +476,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($colour2, 'SassColour');
 		SassLiteral::assertType($weight, 'SassNumber');
 		SassLiteral::assertInRange($weight, 0, 100, '%');
-		
+
 		/*
 		 * This algorithm factors in both the user-provided weight
 		 * and the difference between the alpha values of the two colours
@@ -499,7 +499,7 @@ class SassScriptFunctions {
 		 * Finally, the weight of colour1 is renormalized to be within [0, 1]
 		 * and the weight of colour2 is given by 1 minus the weight of colour1.
 		 */
-		
+
 		$p = $weight->value/100;
 		$w = $p * 2 - 1;
 		$a = $colour1->alpha - $colour2->alpha;
@@ -516,7 +516,7 @@ class SassScriptFunctions {
 		$rgba[] = $colour1->alpha * $p + $colour2->alpha * (1 - $p);
 		return new SassColour($rgba);
 	}
-	
+
 	/**
 	 * Adjusts the colour
 	 * @param SassColour the colour to adjust
@@ -537,22 +537,22 @@ class SassScriptFunctions {
 			SassLiteral::assertType($ofCurrent, 'SassBoolean');
 			$ofCurrent = $ofCurrent->value;
 		}
-		
-		$amount = $amount->value * (($attribute === 'alpha' && $ofCurrent && $units === '') ? 100 : 1); 
-			
+
+		$amount = $amount->value * (($attribute === 'alpha' && $ofCurrent && $units === '') ? 100 : 1);
+
 		return $colour->with(array(
 			$attribute => self::inRange((
 				$ofCurrent ?
 				$colour->$attribute * (1 + ($amount * ($op === self::INCREASE ? 1 : -1))/100) :
 				$colour->$attribute + ($amount * ($op === self::INCREASE ? 1 : -1))
 			), $min, $max)
-		));		
+		));
 	}
-	
+
 	/*
 	 * Number Functions
 	 */
-	
+
 	/**
 	 * Finds the absolute value of a number.
 	 * For example:
@@ -612,7 +612,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($number, 'SassNumber');
 		return new SassNumber(round($number->value).$number->units);
 	}
-	
+
 	/**
 	 * Returns true if two numbers are similar enough to be added, subtracted,
 	 * or compared.
@@ -627,7 +627,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($number2, 'SassNumber');
 		return new SassBoolean($number1->isComparableTo($number2));
 	}
-	
+
 	/**
 	 * Converts a decimal number to a percentage.
 	 * For example:
@@ -680,7 +680,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($number, 'SassNumber');
 		return new SassBoolean($number->isUnitless());
 	}
-	
+
 	/*
 	 * String Functions
 	 */
@@ -714,18 +714,18 @@ class SassScriptFunctions {
 	/**
 	 * Returns the variable whose name is the string.
 	 * @param string String to unquote
-	 * @return 
+	 * @return
 	 * @throws SassScriptFunctionException If $string is not a string
 	 */
 	public static function get_var($string) {
 		SassLiteral::assertType($string, 'SassString');
 		return new SassString($string->toVar());
 	}
-	
+
 	/*
 	 * Misc. Functions
 	 */
-	
+
 	/**
 	 * Inspects the type of the argument, returning it as an unquoted string.
 	 * @param SassLiteral The object to inspect
@@ -737,7 +737,7 @@ class SassScriptFunctions {
 		SassLiteral::assertType($obj, SassLiteral);
 		return new SassString($obj->typeOf);
 	}
-	
+
 	/**
 	 * Ensures the value is within the given range, clipping it if needed.
 	 * @param float the value to test
